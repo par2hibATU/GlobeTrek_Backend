@@ -51,7 +51,7 @@ router.get("/:id", async (req,res)=>{
 router.get("/", async (req, res, next)=>{
 
     try{
-        const hotels = await Hotel.findById("jhodfthasdf");
+        const hotels = await Hotel.find();
         res.status(200).json(hotels)
     }catch(err){
         next(err)
