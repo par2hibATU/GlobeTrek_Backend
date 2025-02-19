@@ -1,6 +1,7 @@
 import User from "../models/User.js"
 import bcrypt from "bcryptjs"
 import { createError } from "../utills/error.js";
+import jwt from "jsonwebtoken";
 
 export const register = async(req, res, next)=>{
     try{
@@ -25,8 +26,15 @@ export const login = async(req, res, next)=>{
         if(!user) return next(createError(404, "User not found!"))
         
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password)
-        if(!isPasswordCorrect) return next(createError(400, "Wrong password or Username!"))
-        res.status(200).json(user);
+
+        if(!isPasswordCorrect) return next(createError(400, "Wrong password or Username!"));
+
+        //if password is correct, we gonna create a new token here:
+        const token = jwt.sign({id:user._id, isAdmin: user.isAdmin }, "sdfsdfsd");
+
+        //this will hide the password when login is successful and shows the username and other info which is under user._doc
+        const {password, isAdmin, ...otherDetails} = user._doc;
+        res.status(200).json({...otherDetails});
     }catch(err){
         next(err)
     }
