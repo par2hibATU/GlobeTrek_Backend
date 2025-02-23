@@ -12,6 +12,9 @@ router.get("/checkuser/:id", verifyUser, (req, res, next)=>{
     res.send("Hello user, you are logged in!! And you are allowed to delete your acc..")
 })
 
+router.get("/checkAdmin/:id", verifyUser, (req, res, next)=>{
+    res.send("Hello admin, you are logged in!! And you are allowed to delete your acc..")
+})
 //update
 router.put("/:id", updateUser)
 
