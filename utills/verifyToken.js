@@ -26,4 +26,3 @@ export const verifyUser = (req, res, next)=>{
 }
 
 
-//you need to pull the feature_authentication
