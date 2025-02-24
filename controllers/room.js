@@ -4,7 +4,7 @@ import { createError } from "../utills/error.js";
 
 
 export const createRoom = async (req, res, next) => {
-    const hotelId = req.params.hotelId;  // Ensure this matches the URL param correctly
+    const hotelId = req.params.hotelId;  
     const newRoom = new Room(req.body);
 
     try {
